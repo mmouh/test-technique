@@ -1,0 +1,56 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <span *ngIf="operattionType=='create'"> Create a new salarie</span>
+  <span *ngIf="operattionType=='update'"> update salarie</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-button matSuffix mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="id">
+        <mat-form-field>
+          <input formControlName="prenom" matInput placeholder="Prenom*">
+          <mat-error>Ce champ est obligatire !</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="fonction" matInput placeholder="Fonction*">
+        </mat-form-field>
+        <!--
+
+        -->
+        <mat-form-field>
+          <input formControlName="adresse" matInput placeholder="Adresse*">
+        </mat-form-field>
+        <!--
+
+        -->
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="anneeExperience" type="number" matInput placeholder="Années experience*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="salaire" type="number" matInput placeholder="Salaire*">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="dateNaissance" type="date-local" matInput [matDatepicker]="picker"
+                 placeholder="Date naissance*">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div class="button-row">
+    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+  </div>
+</form>
